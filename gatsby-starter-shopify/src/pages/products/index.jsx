@@ -6,7 +6,8 @@ import { Seo } from "../../components/seo"
 import { MoreButton } from "../../components/more-button"
 import { title } from "./index.module.css"
 
-export default function Products({ data: { products } }) {
+const Products = ({ data: { products } }) => {
+  console.log(data)
   return (
     <Layout>
       <Seo title="All Products" />
@@ -19,17 +20,26 @@ export default function Products({ data: { products } }) {
   )
 }
 
+export default Products
+
 export const query = graphql`
   {
-    products: allShopifyProduct(
-      sort: { fields: publishedAt, order: ASC }
-      limit: 24
-    ) {
+    allShopifyProduct {
       nodes {
-        ...ProductCard
-      }
-      pageInfo {
-        hasNextPage
+        title
+        handle
+        variants {
+          shopifyId
+        }
+        priceRangeV2 {
+          maxVariantPrice {
+            amount
+          }
+        }
+        description
+        images {
+          src
+        }
       }
     }
   }
