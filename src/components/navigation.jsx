@@ -14,6 +14,8 @@ export function Navigation({ className }) {
     }
   `)
 
+  console.log(productTypes)
+
   return (
     <nav className={[navStyle, className].join(" ")}>
       <Link
@@ -22,7 +24,7 @@ export function Navigation({ className }) {
         to="/products/"
         activeClassName={activeLink}
       >
-        All products
+        全商品
       </Link>
       {productTypes.map((name) => (
         <Link
